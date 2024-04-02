@@ -8,22 +8,37 @@ namespace SimpleBank.Models
     public class Person
     {
         [Key]
-        public int personid { get; set; }
+        [Column("person_id")]
+        public int personId { get; set; }
 
         [Required]
-        public String name{ get; set; }
+        [Column("name")]
+        public String name { get; set; }
 
         [Required]
-        public String lastname { get; set; }
+        [Column("last_name")]
+        public String lastName { get; set; }
 
         [Required]
-        public String taxid { get; set; }
+        [Column("tax_id")]
+        public String taxId { get; set; }
 
         [Required]
-        public DateTime birthday { get; set; }
+        [Column("birthday")]
+        public DateTime birthday { get; set; } = DateTime.Now;
 
         [Required]
-        [ForeignKey("userid")]
-        public int userid { get; set; }
+        [Column("user_id")]
+        [ForeignKey("user_id")]
+        public int userId { get; set; }
+
+        [Column("created_at")]
+        public DateTime createdAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime updatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("deleted_at")]
+        public DateTime? deletedAt { get; set; } = null;
     }
 }
