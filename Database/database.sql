@@ -21,7 +21,7 @@ CREATE TABLE "account" (
 CREATE TABLE "user" (
     user_id BIGSERIAL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    PASSWORD TEXT DEFAULT NULL,
+    "password" TEXT DEFAULT NULL,
     account_id BIGINT UNIQUE,
     created_at DATE NOT NULL DEFAULT NOW(),
     updated_at DATE NOT NULL DEFAULT NOW(),
@@ -44,7 +44,7 @@ CREATE TYPE EnumTransactionType AS ENUM ('Pix', 'Transference', 'TED', 'DOC');
 
 CREATE TABLE "transactions" (
     transaction_id BIGSERIAL,
-    date DATE NOT NULL DEFAULT NOW(),
+    "date_transaction" DATE NOT NULL DEFAULT NOW(),
     account_sender BIGINT NOT NULL,
     account_receiver BIGINT NOT NULL,
     transaction_value numeric(16, 2) NOT NULL,
