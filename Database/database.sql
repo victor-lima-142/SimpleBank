@@ -9,34 +9,34 @@
 
 CREATE TABLE "account" (
     account_id BIGSERIAL,
-    agency varchar(10) NOT NULL,
-    number varchar(14) NOT NULL UNIQUE,
+    agency VARCHAR(10) NOT NULL,
+    "number" VARCHAR(14) NOT NULL UNIQUE,
     starting_capital numeric(16, 2) NOT NULL DEFAULT 0.00,
     balance numeric(16, 2) NOT NULL DEFAULT 0.00,
     created_at DATE NOT NULL DEFAULT NOW(),
-    updated_at DAtE NOT NULL DEFAULT NOW(),
+    updated_at DATE NOT NULL DEFAULT NOW(),
     deletedAt DATE DEFAULT NULL
 );
 
 CREATE TABLE "user" (
     user_id BIGSERIAL,
-    email varchar(100) NOT NULL UNIQUE,
-    PASSWORD text DEFAULT NULL,
-    account_id bigint UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    PASSWORD TEXT DEFAULT NULL,
+    account_id BIGINT UNIQUE,
     created_at DATE NOT NULL DEFAULT NOW(),
-    updated_at DAtE NOT NULL DEFAULT NOW(),
+    updated_at DATE NOT NULL DEFAULT NOW(),
     deletedAt DATE DEFAULT NULL
 );
 
 CREATE TABLE "person" (
     person_id BIGSERIAL,
-    name varchar(70) NOT NULL,
-    last_name varchar(70) NOT NULL,
-    tax_id varchar(14) NOT NULL UNIQUE,
+    name VARCHAR(70) NOT NULL,
+    last_name VARCHAR(70) NOT NULL,
+    tax_id VARCHAR(14) NOT NULL UNIQUE,
     birthday DATE NOT NULL,
-    user_id bigint UNIQUE,
+    user_id BIGINT UNIQUE,
     created_at DATE NOT NULL DEFAULT NOW(),
-    updated_at DAtE NOT NULL DEFAULT NOW(),
+    updated_at DATE NOT NULL DEFAULT NOW(),
     deletedAt DATE DEFAULT NULL
 );
 
@@ -45,8 +45,8 @@ CREATE TYPE EnumTransactionType AS ENUM ('Pix', 'Transference', 'TED', 'DOC');
 CREATE TABLE "transactions" (
     transaction_id BIGSERIAL,
     date DATE NOT NULL DEFAULT NOW(),
-    account_sender bigint NOT NULL,
-    account_receiver bigint NOT NULL,
+    account_sender BIGINT NOT NULL,
+    account_receiver BIGINT NOT NULL,
     transaction_value numeric(16, 2) NOT NULL,
     transaction_type EnumTransactionType NOT NULL,
 );
