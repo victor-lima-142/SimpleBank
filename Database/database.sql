@@ -22,7 +22,10 @@ CREATE TABLE "user" (
     user_id BIGSERIAL,
     email varchar(100) NOT NULL UNIQUE,
     PASSWORD text DEFAULT NULL,
-    account_id bigint UNIQUE
+    account_id bigint UNIQUE,
+    created_at DATE NOT NULL DEFAULT NOW(),
+    updated_at DAtE NOT NULL DEFAULT NOW(),
+    deletedAt DATE DEFAULT NULL
 );
 
 CREATE TABLE "person" (
@@ -31,7 +34,10 @@ CREATE TABLE "person" (
     last_name varchar(70) NOT NULL,
     tax_id varchar(14) NOT NULL UNIQUE,
     birthday DATE NOT NULL,
-    user_id bigint UNIQUE
+    user_id bigint UNIQUE,
+    created_at DATE NOT NULL DEFAULT NOW(),
+    updated_at DAtE NOT NULL DEFAULT NOW(),
+    deletedAt DATE DEFAULT NULL
 );
 
 CREATE TYPE EnumTransactionType AS ENUM ('Pix', 'Transference', 'TED', 'DOC');
@@ -42,7 +48,7 @@ CREATE TABLE "transactions" (
     account_sender bigint NOT NULL,
     account_receiver bigint NOT NULL,
     transaction_value numeric(16, 2) NOT NULL,
-    transaction_type EnumTransactionType NOT NULL
+    transaction_type EnumTransactionType NOT NULL,
 );
 
 ALTER TABLE
