@@ -48,7 +48,7 @@ CREATE TABLE "transactions" (
     account_sender BIGINT NOT NULL,
     account_receiver BIGINT NOT NULL,
     transaction_value numeric(16, 2) NOT NULL,
-    transaction_type EnumTransactionType NOT NULL,
+    transaction_type EnumTransactionType NOT NULL
 );
 
 ALTER TABLE

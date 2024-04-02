@@ -41,18 +41,18 @@ namespace SimpleBank.Controllers
         [HttpPost]
         public async Task<ActionResult<Account>> CreateAccount(Account account)
         {
-            account.deletedat = null;
-            account.createdat = DateTime.UtcNow;
+            account.deletedAt = null;
+            account.createdAt = DateTime.UtcNow;
             await _context.Accounts.AddAsync(account);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetAccount", new { id = account.accountid }, account);
+            return CreatedAtAction("GetAccount", new { id = account.accountId }, account);
         }
 
         [Route("update/{id}")]
         [HttpPut]
         public async Task<IActionResult> UpdateAccount(int id, Account account)
         {
-            if (id != account.accountid)
+            if (id != account.accountId)
             {
                 return BadRequest();
             }
@@ -97,7 +97,7 @@ namespace SimpleBank.Controllers
 
         private bool AccountExists(int id)
         {
-            return _context.Accounts.Any(e => e.accountid == id);
+            return _context.Accounts.Any(e => e.accountId == id);
         }
     }
 }

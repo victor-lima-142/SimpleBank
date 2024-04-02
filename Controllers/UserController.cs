@@ -43,14 +43,14 @@ namespace SimpleBank.Controllers
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetUser", new { id = user.userid }, user);
+            return CreatedAtAction("GetUser", new { id = user.userId }, user);
         }
 
         [Route("update/{id}")]
         [HttpPut]
         public async Task<IActionResult> UpdateUser(int id, User user)
         {
-            if (id != user.userid)
+            if (id != user.userId)
             {
                 return BadRequest();
             }
@@ -95,7 +95,7 @@ namespace SimpleBank.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.userid == id);
+            return _context.Users.Any(e => e.userId == id);
         }
     }
 }

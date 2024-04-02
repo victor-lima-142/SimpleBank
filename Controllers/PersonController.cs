@@ -42,14 +42,14 @@ namespace SimpleBank.Controllers
             person.birthday = DateTime.UtcNow;
             await _context.Persons.AddAsync(person);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetPerson", new { id = person.personid }, person);
+            return CreatedAtAction("GetPerson", new { id = person.personId }, person);
         }
 
         [Route("update/{id}")]
         [HttpPut]
         public async Task<IActionResult> UpdatePerson(int id, Person person)
         {
-            if (id != person.personid)
+            if (id != person.personId)
             {
                 return BadRequest();
             }
@@ -94,7 +94,7 @@ namespace SimpleBank.Controllers
 
         private bool PersonExists(int id)
         {
-            return _context.Persons.Any(e => e.personid == id);
+            return _context.Persons.Any(e => e.personId == id);
         }
     }
 }
