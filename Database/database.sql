@@ -15,7 +15,7 @@ CREATE TABLE "account" (
     balance numeric(16, 2) NOT NULL DEFAULT 0.00,
     created_at DATE NOT NULL DEFAULT NOW(),
     updated_at DATE NOT NULL DEFAULT NOW(),
-    deletedAt DATE DEFAULT NULL
+    deleted_at DATE DEFAULT NULL
 );
 
 CREATE TABLE "user" (
@@ -25,7 +25,7 @@ CREATE TABLE "user" (
     account_id BIGINT UNIQUE,
     created_at DATE NOT NULL DEFAULT NOW(),
     updated_at DATE NOT NULL DEFAULT NOW(),
-    deletedAt DATE DEFAULT NULL
+    deleted_at DATE DEFAULT NULL
 );
 
 CREATE TABLE "person" (
@@ -37,7 +37,7 @@ CREATE TABLE "person" (
     user_id BIGINT UNIQUE,
     created_at DATE NOT NULL DEFAULT NOW(),
     updated_at DATE NOT NULL DEFAULT NOW(),
-    deletedAt DATE DEFAULT NULL
+    deleted_at DATE DEFAULT NULL
 );
 
 CREATE TYPE EnumTransactionType AS ENUM ('Pix', 'Transference', 'TED', 'DOC');
