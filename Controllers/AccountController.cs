@@ -11,9 +11,9 @@ namespace SimpleBank.Controllers
 
     public class AccountController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly SimpleBankDBContext _context;
 
-        public AccountController(AppDbContext context)
+        public AccountController(SimpleBankDBContext context)
         {
             _context = context;
         }

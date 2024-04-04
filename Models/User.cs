@@ -33,5 +33,9 @@ namespace SimpleBank.Models
 
         [Column("deleted_at")]
         public DateTime? deletedAt { get; set; } = null;
+
+        public Account Account { get; set; } = null!;
+
+        public Person? Person { get; set; }
     }
 }

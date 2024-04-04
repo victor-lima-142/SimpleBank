@@ -40,5 +40,7 @@ namespace SimpleBank.Models
 
         [Column("deleted_at")]
         public DateTime? deletedAt { get; set; } = null;
+
+        public User User { get; set; } = null!;
     }
 }

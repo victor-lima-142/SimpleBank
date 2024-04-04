@@ -9,9 +9,9 @@ namespace SimpleBank.Controllers
     [Route("simpleBank/api/persons")]
     public class PersonController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly SimpleBankDBContext _context;
 
-        public PersonController(AppDbContext context)
+        public PersonController(SimpleBankDBContext context)
         {
             _context = context;
         }

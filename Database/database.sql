@@ -40,15 +40,18 @@ CREATE TABLE "person" (
     deleted_at DATE DEFAULT NULL
 );
 
-CREATE TYPE EnumTransactionType AS ENUM ('Pix', 'Transference', 'TED', 'DOC');
+CREATE TABLE "transaction_types" (
+    transaction_type_id BIGSERIAL,
+    transaction_type_name VARCHAR(20) NOT NULL UNIQUE
+);
 
 CREATE TABLE "transactions" (
     transaction_id BIGSERIAL,
     "date_transaction" DATE NOT NULL DEFAULT NOW(),
+    transaction_type_id BIGINT NOT NULL,
     account_sender BIGINT NOT NULL,
     account_receiver BIGINT NOT NULL,
-    transaction_value numeric(16, 2) NOT NULL,
-    transaction_type EnumTransactionType NOT NULL
+    transaction_value numeric(16, 2) NOT NULL
 );
 
 ALTER TABLE
@@ -65,6 +68,11 @@ ALTER TABLE
     "person"
 ADD
     CONSTRAINT PK_person PRIMARY KEY (person_id);
+
+ALTER TABLE
+    "transaction_types"
+ADD
+    CONSTRAINT PK_transaction_type PRIMARY KEY (transaction_type_id);
 
 ALTER TABLE
     "transactions"
@@ -84,9 +92,19 @@ ADD
 ALTER TABLE
     "transactions"
 ADD
+    CONSTRAINT FK_transaction_type_transactions FOREIGN KEY (transaction_type_id) REFERENCES "transaction_types"(transaction_type_id);
+
+ALTER TABLE
+    "transactions"
+ADD
     CONSTRAINT FK_account_sender_transactions FOREIGN KEY (account_sender) REFERENCES "account"(account_id);
 
 ALTER TABLE
     "transactions"
 ADD
     CONSTRAINT FK_account_receiver_transactions FOREIGN KEY (account_receiver) REFERENCES "account"(account_id);
+
+INSERT INTO transaction_types (transaction_type_name) VALUES ('PIX');
+INSERT INTO transaction_types (transaction_type_name) VALUES ('Transferência');
+INSERT INTO transaction_types (transaction_type_name) VALUES ('TED');
+INSERT INTO transaction_types (transaction_type_name) VALUES ('DOC');

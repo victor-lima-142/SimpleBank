@@ -1,15 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
-interface IAccountUpdate
-{
-    String? agency { get; set; }
-    String? number { get; set; }
-    double? startingcapital { get; set; }
-    double? balance { get; set; }
-}
 
 namespace SimpleBank.Models
 {
@@ -45,5 +38,9 @@ namespace SimpleBank.Models
 
         [Column("deleted_at")]
         public DateTime? deletedAt { get; set; } = null;
+
+        public User? User { get; set; }
+        public ICollection<Transaction> TransactionsSent { get; } = new List<Transaction>();
+        public ICollection<Transaction> TransactionsReceived { get; } = new List<Transaction>();
     }
 }
