@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace SimpleBank.Models
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("transaction")]
+    [System.ComponentModel.DataAnnotations.Schema.Table("transactions")]
     public class Transaction
     {
         [Key]
@@ -12,31 +13,22 @@ namespace SimpleBank.Models
 
         [Required]
         [Column("date_transaction")]
-        public DateTime dateTransaction { get; set; }
-
-        [Required]
-        [ForeignKey("transaction_type_id")]
-        [Column("transaction_type_id")]
-        public int transactionTypeId { get; set; }
-
-        [Required]
-        [ForeignKey("account_sender")]
-        [Column("account_sender")]
-        public int accountSender { get; set; }
-
-        [Required]
-        [ForeignKey("account_receiver")]
-        [Column("account_receiver")]
-        public int accountReceiver { get; set; }
+        public DateTime dateTransaction { get; set; } = DateTime.UtcNow;
 
         [Required]
         [Column("transaction_value")]
         public double transactionValue { get; set; } = 0.0;
 
-        public TransactionType TransactionType { get; set; } = null!;
-        public Account SenderAccount { get; set; } = null!;
-        public Account ReceiverAccount { get; set; } = null!;
+        [Required]
+        [Column("transaction_type_id")]
+        public int transactionTypeId { get; set; }
 
+        [Required]
+        [Column("account_sender")]
+        public int accountSender { get; set; }
 
+        [Required]
+        [Column("account_receiver")]
+        public int accountReceiver { get; set; }
     }
 }

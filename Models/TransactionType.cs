@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace SimpleBank.Models
 {
@@ -14,7 +15,5 @@ namespace SimpleBank.Models
         [Required]
         [Column("transaction_type_name")]
         public string transactionTypeName { get; set; }
-
-        public ICollection<Transaction> Transactions { get; } = new List<Transaction>();
     }
 }

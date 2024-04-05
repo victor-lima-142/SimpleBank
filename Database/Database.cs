@@ -17,40 +17,60 @@ namespace SimpleBank.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /* User to Account Relationship */
-            modelBuilder.Entity<Account>()
-                .HasOne(account => account.User)
-                .WithOne(user => user.Account)
-                .HasForeignKey<User>(user => user.accountId)
-                .IsRequired();
+            modelBuilder.Entity<Account>(entity =>
+            {
+                entity.ToTable("account");
+            });
 
-            /* Person to User Relationship */
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Person)
-                .WithOne(person => person.User)
-                .HasForeignKey<Person>(person => person.userId)
-                .IsRequired();
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity
+                .HasOne<Account>()
+                .WithOne()
+                .HasForeignKey("account_id")
+                .OnDelete(DeleteBehavior.Cascade);
 
-            /* Account (sender) to Transaction Relationship */
-            modelBuilder.Entity<Account>()
-                .HasMany(account => account.TransactionsSent)
-                .WithOne(transaction => transaction.SenderAccount)
-                .HasForeignKey(transaction => transaction.accountSender)
-                .IsRequired();
+                entity.ToTable("user");
+            });
 
-            /* Account (receiver) to Transaction Relationship */
-            modelBuilder.Entity<Account>()
-                .HasMany(account => account.TransactionsReceived)
-                .WithOne(transaction => transaction.ReceiverAccount)
-                .HasForeignKey(transaction => transaction.accountReceiver)
-                .IsRequired();
+            modelBuilder.Entity<Person>(entity =>
+            {
+                entity
+                .HasOne<User>()
+                .WithOne()
+                .HasForeignKey("user_id")
+                .OnDelete(DeleteBehavior.Cascade);
 
-            /* Transaction to TransactionType Relationship */
-            modelBuilder.Entity<TransactionType>()
-                .HasMany(transactionType => transactionType.Transactions)
-                .WithOne(transaction => transaction.TransactionType)
-                .HasForeignKey(transaction => transaction.transactionTypeId)
-                .IsRequired();
+                entity.ToTable("person");
+            });
+
+            modelBuilder.Entity<TransactionType>(entity =>
+            {
+                entity.ToTable("transaction_type");
+            });
+
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity
+                .HasOne<TransactionType>()
+                .WithMany()
+                .HasForeignKey("transaction_type_id")
+                .OnDelete(DeleteBehavior.Cascade);
+
+                entity
+                .HasOne<Account>()
+                .WithMany()
+                .HasForeignKey("account_sender")
+                .OnDelete(DeleteBehavior.Cascade);
+
+                entity
+                .HasOne<Account>()
+                .WithMany()
+                .HasForeignKey("account_receiver")
+                .OnDelete(DeleteBehavior.Cascade);
+
+                entity.ToTable("transactions");
+            });
 
             base.OnModelCreating(modelBuilder);
         }

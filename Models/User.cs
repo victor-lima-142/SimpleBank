@@ -1,6 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace SimpleBank.Models
 {
@@ -22,7 +22,6 @@ namespace SimpleBank.Models
 
         [Required]
         [Column("account_id")]
-        [ForeignKey("account_id")]
         public int accountId { get; set; }
 
         [Column("created_at")]
@@ -33,9 +32,5 @@ namespace SimpleBank.Models
 
         [Column("deleted_at")]
         public DateTime? deletedAt { get; set; } = null;
-
-        public Account Account { get; set; } = null!;
-
-        public Person? Person { get; set; }
     }
 }
