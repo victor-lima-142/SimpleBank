@@ -10,7 +10,7 @@ namespace SimpleBank.Models
 
         [Key]
         [Column("transaction_type_id")]
-        public int transactionTypeId { get; set; }
+        public int TransactionTypeId { get; set; }
 
         [Required]
         [Column("transaction_type_name")]

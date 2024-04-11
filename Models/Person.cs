@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
+using SimpleBank.Data;
 
 namespace SimpleBank.Models
 {
@@ -9,36 +10,35 @@ namespace SimpleBank.Models
     {
         [Key]
         [Column("person_id")]
-        public int personId { get; set; }
+        public int PersonId { get; set; }
 
         [Required]
         [Column("name")]
-        public String name { get; set; }
+        public required string PersonName { get; set; }
 
         [Required]
         [Column("last_name")]
-        public String lastName { get; set; }
+        public required string PersonLastName { get; set; }
 
         [Required]
         [Column("tax_id")]
-        public String taxId { get; set; }
+        public required string TaxId { get; set; }
 
         [Required]
-        [Column("birthday")]
-        public DateTime birthday { get; set; } = DateTime.Now;
+        [Column("PersonBirthday")]
+        public required DateTime PersonBirthday { get; set; } = DateTime.Now;
 
         [Required]
         [Column("user_id")]
-        public int userId { get; set; }
-
+        public int UserId { get; set; }
 
         [Column("created_at")]
-        public DateTime createdAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Column("updated_at")]
-        public DateTime updatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         [Column("deleted_at")]
-        public DateTime? deletedAt { get; set; } = null;
+        public DateTime? DeletedAt { get; set; } = null;
     }
 }

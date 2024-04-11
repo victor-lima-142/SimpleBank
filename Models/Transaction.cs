@@ -9,26 +9,26 @@ namespace SimpleBank.Models
     {
         [Key]
         [Column("transaction_id")]
-        public int transactionId { get; set; }
+        public int TransactionId { get; set; }
 
         [Required]
         [Column("date_transaction")]
-        public DateTime dateTransaction { get; set; } = DateTime.UtcNow;
+        public DateTime DateTransaction { get; set; } = DateTime.UtcNow;
 
         [Required]
         [Column("transaction_value")]
-        public double transactionValue { get; set; } = 0.0;
+        public double TransactionValue { get; set; } = 0.0;
 
         [Required]
         [Column("transaction_type_id")]
-        public int transactionTypeId { get; set; }
+        public int TransactionTypeId { get; set; }
 
         [Required]
         [Column("account_sender")]
-        public int accountSender { get; set; }
+        public int AccountSender { get; set; }
 
         [Required]
         [Column("account_receiver")]
-        public int accountReceiver { get; set; }
+        public int AccountReceiver { get; set; }
     }
 }
