@@ -20,8 +20,6 @@ namespace SimpleBank.Data
 
         public virtual DbSet<User> Users { get; set; }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=simpleBank;Username=postgres;Password=CYvr9tNwEbalWAZPsMiC");
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
