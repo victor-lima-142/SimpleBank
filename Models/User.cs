@@ -1,38 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using SimpleBank.Data;
+﻿using System;
+using System.Collections.Generic;
 
-namespace SimpleBank.Models
+namespace SimpleBank.Models;
+
+public partial class User
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("user")]
-    public class User
-    {
+    public long UserId { get; set; }
 
-        [Key]
-        [Column("user_id")]
-        public int UserId { get; set; }
+    public string Email { get; set; } = null!;
 
-        [Required]
-        [Column("email")]
-        public required string Email { get; set; }
+    public string? Password { get; set; }
 
-        [Required]
-        [Column("password")]
-        public required string Password { get; set; }
+    public long? AccountId { get; set; }
 
-        [Required]
-        [Column("account_id")]
-        public int AccountId { get; set; }
+    public DateOnly CreatedAt { get; set; }
 
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly UpdatedAt { get; set; }
 
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly? DeletedAt { get; set; }
 
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; } = null;
-    }
+    public virtual Account? Account { get; set; }
+
+    public virtual Person? Person { get; set; }
 }

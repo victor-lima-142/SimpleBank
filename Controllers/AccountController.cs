@@ -42,7 +42,6 @@ namespace SimpleBank.Controllers
         public async Task<ActionResult<Account>> CreateAccount(Account account)
         {
             account.DeletedAt = null;
-            account.CreatedAt = DateTime.UtcNow;
             await _context.Accounts.AddAsync(account);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetAccount", new { id = account.AccountId }, account);

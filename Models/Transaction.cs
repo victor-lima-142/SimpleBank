@@ -1,34 +1,25 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
 
-namespace SimpleBank.Models
+namespace SimpleBank.Models;
+
+public partial class Transaction
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("transactions")]
-    public class Transaction
-    {
-        [Key]
-        [Column("transaction_id")]
-        public int TransactionId { get; set; }
+    public long TransactionId { get; set; }
 
-        [Required]
-        [Column("date_transaction")]
-        public DateTime DateTransaction { get; set; } = DateTime.UtcNow;
+    public DateOnly DateTransaction { get; set; }
 
-        [Required]
-        [Column("transaction_value")]
-        public double TransactionValue { get; set; } = 0.0;
+    public long TransactionTypeId { get; set; }
 
-        [Required]
-        [Column("transaction_type_id")]
-        public int TransactionTypeId { get; set; }
+    public long AccountSender { get; set; }
 
-        [Required]
-        [Column("account_sender")]
-        public int AccountSender { get; set; }
+    public long AccountReceiver { get; set; }
 
-        [Required]
-        [Column("account_receiver")]
-        public int AccountReceiver { get; set; }
-    }
+    public decimal TransactionValue { get; set; }
+
+    public virtual Account AccountReceiverNavigation { get; set; } = null!;
+
+    public virtual Account AccountSenderNavigation { get; set; } = null!;
+
+    public virtual TransactionType TransactionType { get; set; } = null!;
 }

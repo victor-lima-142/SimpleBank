@@ -39,7 +39,6 @@ namespace SimpleBank.Controllers
         [HttpPost]
         public async Task<ActionResult<Person>> CreatePerson(Person person)
         {
-            person.PersonBirthday = DateTime.UtcNow;
             await _context.Persons.AddAsync(person);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetPerson", new { id = person.PersonId }, person);

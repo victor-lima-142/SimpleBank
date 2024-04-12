@@ -1,44 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
-using SimpleBank.Data;
+﻿using System;
+using System.Collections.Generic;
 
-namespace SimpleBank.Models
+namespace SimpleBank.Models;
+
+public partial class Person
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("person")]
-    public class Person
-    {
-        [Key]
-        [Column("person_id")]
-        public int PersonId { get; set; }
+    public long PersonId { get; set; }
 
-        [Required]
-        [Column("name")]
-        public required string PersonName { get; set; }
+    public string Name { get; set; } = null!;
 
-        [Required]
-        [Column("last_name")]
-        public required string PersonLastName { get; set; }
+    public string LastName { get; set; } = null!;
 
-        [Required]
-        [Column("tax_id")]
-        public required string TaxId { get; set; }
+    public string TaxId { get; set; } = null!;
 
-        [Required]
-        [Column("PersonBirthday")]
-        public required DateTime PersonBirthday { get; set; } = DateTime.Now;
+    public DateOnly Birthday { get; set; }
 
-        [Required]
-        [Column("user_id")]
-        public int UserId { get; set; }
+    public long? UserId { get; set; }
 
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly CreatedAt { get; set; }
 
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly UpdatedAt { get; set; }
 
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; } = null;
-    }
+    public DateOnly? DeletedAt { get; set; }
+
+    public virtual User? User { get; set; }
 }

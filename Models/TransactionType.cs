@@ -1,19 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
 
-namespace SimpleBank.Models
+namespace SimpleBank.Models;
+
+public partial class TransactionType
 {
-    [System.ComponentModel.DataAnnotations.Schema.Table("transaction_types")]
-    public class TransactionType
-    {
+    public long TransactionTypeId { get; set; }
 
-        [Key]
-        [Column("transaction_type_id")]
-        public int TransactionTypeId { get; set; }
+    public string TransactionTypeName { get; set; } = null!;
 
-        [Required]
-        [Column("transaction_type_name")]
-        public string transactionTypeName { get; set; }
-    }
+    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

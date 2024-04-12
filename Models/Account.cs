@@ -1,41 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
-using SimpleBank.Data;
+﻿using System;
+using System.Collections.Generic;
 
-namespace SimpleBank.Models
+namespace SimpleBank.Models;
+
+public partial class Account
 {
-    [Table("account")]
-    public class Account
-    {
+    public long AccountId { get; set; }
 
-        [Key]
-        [Column("account_id")]
-        public int AccountId { get; set; }
+    public string Agency { get; set; } = null!;
 
-        [Required]
-        [Column("agency")]
-        public required string Agency { get; set; }
+    public string Number { get; set; } = null!;
 
-        [Required]
-        [Column("number")]
-        public required string AccountNumber { get; set; }
+    public decimal StartingCapital { get; set; }
 
-        [Required]
-        [Column("balance")]
-        public double Balance { get; set; } = 0.0;
+    public decimal Balance { get; set; }
 
-        [Required]
-        [Column("starting_capital")]
-        public double StartingCapital { get; set; } = 0.0;
+    public DateOnly CreatedAt { get; set; }
 
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly UpdatedAt { get; set; }
 
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateOnly? DeletedAt { get; set; }
 
-        [Column("deleted_at")]
-        public DateTime? DeletedAt { get; set; } = null;
-    }
+    public virtual ICollection<Transaction> TransactionAccountReceiverNavigations { get; set; } = new List<Transaction>();
+
+    public virtual ICollection<Transaction> TransactionAccountSenderNavigations { get; set; } = new List<Transaction>();
+
+    public virtual User? User { get; set; }
 }
